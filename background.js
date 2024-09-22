@@ -12,16 +12,15 @@ chrome.contextMenus.onClicked.addListener((info) => {
       chrome.scripting.executeScript({
         target: { tabId: tabs[0].id },
         function: copySelectedText,
-        args: [info.selectionText] // 传递选中的文本
+        args: [info.selectionText]
       });
     });
   }
 });
 
 function copySelectedText(selectedText) {
-  navigator.clipboard.writeText(selectedText).then(() => {
-    console.log("选中的文本已复制到剪贴板");
-  }).catch(err => {
-    console.error("复制失败:", err);
+  navigator.clipboard.writeText(selectedText).catch(err => {
+    // 保留错误处理，但不输出到控制台
+    // console.error("复制失败:", err);
   });
 }
